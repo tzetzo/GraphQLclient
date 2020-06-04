@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopo
 //     .on('error', error => console.log('Error connecting to MongoLab:', error));
 
 app.use(bodyParser.json());
-app.use('/graphql', expressGraphQL({
+app.use('/graphql', expressGraphQL({ // By convention we use "/graphql" to access our GraphQL Server
   schema,
   graphiql: true
 }));
