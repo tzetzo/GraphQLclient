@@ -5,7 +5,7 @@ import { graphql } from "react-apollo"; // the glue b/n React & GraphQL wworld
 class SongList extends Component {
   renderSongs() {
     return this.props.data.songs.map(song => {
-      return <li key={song.title}>{song.title}</li>;
+      return <li key={song.id} className="collection-item">{song.title}</li>;
     });
   }
 
@@ -14,7 +14,7 @@ class SongList extends Component {
       return <div>Loading...</div>;
     }
 
-    return <ul>{this.renderSongs()}</ul>;
+    return <ul className='collection'>{this.renderSongs()}</ul>;
   }
 }
 
@@ -22,6 +22,7 @@ class SongList extends Component {
 const query = gql`
   {
     songs {
+      id
       title
     }
   }
