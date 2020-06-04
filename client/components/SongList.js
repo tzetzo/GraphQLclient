@@ -1,15 +1,33 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo"; // the glue b/n React & GraphQL wworld
 import { Link } from "react-router";
-import query from "../queries/fetchSongs";
-
+import gql from "graphql-tag";
+import query from "../queries/fetchSongs"; //fetches the songs
 
 class SongList extends Component {
+  onSongDelete(id) {
+    // invoke the mutation passing parameter
+    this.props
+      .mutate({
+        variables: {
+          id
+        }
+        //refetcQueries: [{ query }] //telling GraphQL to execute the listed query after the mutation
+      })
+      .then(() => this.props.data.refetch()); //refetches the data associated with query; used when the query is associated with this Component
+  }
+
   renderSongs() {
-    return this.props.data.songs.map(song => {
+    return this.props.data.songs.map(({ id, title }) => {
       return (
-        <li key={song.id} className="collection-item">
-          {song.title}
+        <li key={id} className="collection-item">
+          {title}{" "}
+          <i
+            className="material-icons right"
+            onClick={() => this.onSongDelete(id)}
+          >
+            delete
+          </i>
         </li>
       );
     });
@@ -31,6 +49,16 @@ class SongList extends Component {
   }
 }
 
+//template string is used to construct the mutation
+//query variable "$id" used; ID is primitive type like String etc
+const mutation = gql`
+  mutation DeleteSong($id: ID) {
+    deleteSong(id: $id) {
+      id
+    }
+  }
+`;
 
 //executes the query and places the songs under this.props.data.songs
-export default graphql(query)(SongList);
+//associate mutation & query with the Component
+export default graphql(mutation)(graphql(query)(SongList));

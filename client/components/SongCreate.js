@@ -20,7 +20,7 @@ class SongCreate extends Component {
         variables: {
           title: this.state.title
         },
-        refetchQueries: [{ query }]   //telling GraphQL to execute the listed query after the mutation
+        refetchQueries: [{ query }] //telling GraphQL to execute the listed query after the mutation; used when query is not associated with this Component
       })
       .then(() => hashHistory.push("/"));
   }
