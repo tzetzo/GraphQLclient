@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo"; // the glue b/n React & GraphQL wworld
-import { Link } from "react-router";
 import gql from "graphql-tag";
+import { Link } from "react-router";
 import query from "../queries/fetchSongs"; //fetches the songs
 
 class SongList extends Component {

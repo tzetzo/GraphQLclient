@@ -11,7 +11,7 @@ import SongCreate from "./components/SongCreate";
 import SongDetail from "./components/SongDetail";
 
 const client = new ApolloClient({
-  dataIdFromObject: o => o.id //this means we need to include the id in our queries for every record 
+  dataIdFromObject: o => o.id //this means we need to include the id in our queries to make ApolloClient identify the difference in data
 }); //assumes GraphQL Server listens on "/graphql"
 
 const Root = () => {

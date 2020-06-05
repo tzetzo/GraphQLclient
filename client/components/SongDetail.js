@@ -6,10 +6,10 @@ import LyricCreate from "./LyricCreate";
 import LyricList from "./LyricList";
 
 class SongDetail extends Component {
-  render() {
+  render() { 
     const { song } = this.props.data;
 
-    if (this.props.data.loading) {
+    if (!this.props.data.song) {
       return <div>Loading...</div>;
     }
 
